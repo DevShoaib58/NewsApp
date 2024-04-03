@@ -13,19 +13,20 @@ import { useEffect, useState } from "react";
 //     "publishedAt": "2024-03-31T15:15:42Z",
 //     "content": "マイクロソフトは、Webブラウザ上で2Dや3Dモデルの高速なレンダリングなどを可能にするオープンソースのJavaScriptライブラリ「Babylon.js」の最新版「Babylon.js 7.0」正式版をリリースしました。 We are proud to announce that Babylon.js 7.0 has officially been released! The next st… [+42 chars]"
 // }
-const Intro = () => {
-    const [data, setData] = useState([])
+const NEWSAPI = (category) => {
     // const newsapi = import.meta.env.NEWS_API_KEY;
+    const [data, setData] = useState([])
+    // console.log('newsapi: ', newsapi);
     useEffect(() => {
-        axios.get('https://newsapi.org/v2/everything?q=apple&from=2024-03-31&to=2024-03-31&sortBy=popularity&apiKey=abf1d39c4cd5409c944176ef0b5c62da')
-            // axios.get(`https://newsapi.org/v2/everything?q=apple&from=2024-03-31&to=2024-03-31&sortBy=popularity&apiKey=${newsapi}`)
+        axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=abf1d39c4cd5409c944176ef0b5c62da`)
+            // axios.get('https://newsapi.org/v2/everything?q=apple&from=2024-03-31&to=2024-03-31&sortBy=popularity&apiKey=abf1d39c4cd5409c944176ef0b5c62da')
+            // axios.get(`https://newsapi.org/v2/everything?q=apple&from=2024-03-31&to=2024-03-31&sortBy=popularity&apiKey=${import.meta.env.NEWS_API_KEY}`)
             .then((res) => {
                 setData(res.data.articles);
             })
     }, [])
     return (
         <div>
-            {/* {console.log("data :", data)} */}
             <h1 className="text-4xl text-center m-4">NEWS API </h1>
             <section className="text-gray-600 body-font">
                 <div className="container px-5 py-24 mx-auto">
@@ -39,23 +40,22 @@ const Intro = () => {
                         </div>
                     </div> */}
                     <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
-                        {data.map((obj) => {
+                        {data.map((obj, index) => {
                             return (
-                                <>
-                                    <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
-                                        <div className="rounded-lg h-64 overflow-hidden">
-                                            <img alt="content" className="object-cover object-center h-full w-full" src={obj.urlToImage} />
-                                        </div>
-                                        <h2 className="text-xl font-medium title-font text-gray-900 mt-5">{obj.title}</h2>
-                                        <p className="text-base leading-relaxed mt-2">{obj.description}</p>
-                                        <a className="text-purple-500 inline-flex items-center mt-3" href={obj.url} target="blank">Learn More
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                            </svg>
-                                        </a>
+
+                                <div key={index} className="p-4 md:w-1/3 sm:mb-0 mb-6">
+                                    <div className="rounded-lg h-64 overflow-hidden">
+                                        <img alt="content" className="object-contain object-center h-full w-full" src={obj.urlToImage === null ? "https://via.placeholder.com/350x150" : obj.urlToImage} />
                                     </div>
-                                    {/* {console.log(obj)} */}
-                                </>
+                                    <h2 className="text-xl font-medium title-font text-gray-900 mt-5">{obj.title}</h2>
+                                    <p className="text-base leading-relaxed mt-2">{obj.description}</p>
+                                    <a className="text-purple-500 inline-flex items-center mt-3" href={obj.url} target="blank">Learn More
+                                        <svg fill="none" stroke="currentColor" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+
                             )
                         })}
 
@@ -67,4 +67,4 @@ const Intro = () => {
     );
 };
 
-export default Intro;
+export default NEWSAPI;
