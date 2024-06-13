@@ -1,13 +1,13 @@
 import './App.css'
 import NavbarHead from './Components/NavbarHead'
-import Home from './Page/Home'
+import Routers from './Page/Routers'
 
 function App() {
 
   return (
     <>
       <NavbarHead />
-      <Home />
+      <Routers />
     </>
   )
 }

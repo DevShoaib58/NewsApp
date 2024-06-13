@@ -9,7 +9,15 @@ devices.
 
 
 
-
+Challenge Guidelines
+1. The output expected from this challenge is a front-end project using React.js.
+2. You are free to choose at least three data sources from the provided list to fetch
+articles for your news aggregator.
+3. Ensure that the Frontend application can be containerized using Docker and provide
+clear documentation on how to run the project within a Docker container.
+4. Incorporate best practices of software development such as DRY (Don't Repeat
+Yourself), KISS (Keep It Simple, Stupid), and SOLID (Single responsibility, Open-closed,
+Liskov substitution, Interface segregation, Dependency inversion) into your code.
 
 
 
