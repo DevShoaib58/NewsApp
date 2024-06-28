@@ -3,7 +3,7 @@ const NavbarHead = () => {
 
     return (
         <Navbar fluid rounded>
-            <NavbarBrand href="#">
+            <NavbarBrand href="/">
                 <img src="/src/assets/react.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">News Updates</span>
             </NavbarBrand>

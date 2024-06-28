@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Category from "../Components/Category";
 const Home = () => {
-    // const API_key = import.meta.env.NEWS_API_KEY
-    const API_key = "abf1d39c4cd5409c944176ef0b5c62da"
-    const baseURL = "https://newsapi.org/v2/everything?q=bitcoin&apiKey="
+    const [category, setCategory] = useState("general")
+    let API_key = import.meta.env.VITE_NEWS_API_KEY
+    const baseURL = `https://newsapi.org/v2/everything?q=${category}&apiKey=`
     const [data, setData] = useState([])
     useEffect(() => {
         const fetchDate = async () => {
@@ -21,7 +21,7 @@ const Home = () => {
     }, [])
     return (
         <div>
-            {/* <Category /> */}
+            <Category />
             <form className="max-w-md mx-auto">
                 <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">

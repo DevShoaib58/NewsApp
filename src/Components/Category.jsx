@@ -1,39 +1,32 @@
-// import axios from "axios";
-// import { ListGroup, ListGroupItem } from "flowbite-react";
-// import { useEffect, useState } from "react";
 
-const Category = (props) => {
+import axios from "axios";
+import { Button, ButtonGroup } from "flowbite-react";
+import { useEffect, useState } from "react";
 
-    // const [category, setCategory] = useState("general")
-    // const Cat_key = "abf1d39c4cd5409c944176ef0b5c62da"
-    // const [data, setData] = useState([])
-    // useEffect(() => {
-    //     const fetchingData = async () => {
-    //         try {
-    //             const response = await axios.get(`https://newsapi.org/v2/top-headlines/sources?category=business&apiKey=${Cat_key}`)
-    //             setData(response.data.sources)
-
-    //         }
-    //         catch { (e) => console.error(e); }
-    //     }
-    //     fetchingData()
-    // }, [])
+const Category = () => {
+    let API_key = import.meta.env.VITE_NEWS_API_KEY
+    const [cat, setCat] = useState("general")
+    const baseURL = `https://newsapi.org/v2/everything?q=${cat}&apiKey=${API_key}`
+    useEffect(() => {
+        const fetchDate = async () => {
+            try {
+                const response = await axios.get(`${baseURL}`)
+                setCat(response)
+            }
+            catch { e => console.error(e) }
+        }
+        fetchDate()
+    }, [])
     return (
         <div>
-            {/* {console.log('Category: ', data)} */}
-            {console.log('baseURL: ', props.myprop)}
-            {/* <ListGroup className="w-48">
-                {data.map((obj, index) => {
-                    return (
-                        <>
-
-                            <ListGroupItem key={index}>{obj}</ListGroupItem>
-
-                        </>
-                    )
-                })}
-            </ListGroup> */}
-
+            {console.log('cat ', cat)}
+            <div className=" text-center m-8">
+                <ButtonGroup>
+                    <Button color="gray">Profile</Button>
+                    <Button color="gray">Settings</Button>
+                    <Button color="gray">Messages</Button>
+                </ButtonGroup>
+            </div>
         </div>
     );
 };
